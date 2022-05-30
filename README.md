@@ -75,7 +75,7 @@ and return the result from there if the endpoint is called with `companyNumber`.
 ## Example API Requests
 
 **Search for Company:**  
-`https://angular-exercise.trunarrative.cloud/TruProxyAPI/rest/Companies/v1/Search?Query={search_term}`
+`https://exercise.trunarrative.cloud/TruProxyAPI/rest/Companies/v1/Search?Query={search_term}`
 
 <details>
   <summary>Response Example</summary>
@@ -120,7 +120,7 @@ and return the result from there if the endpoint is called with `companyNumber`.
 </details>
 
 **Get Company Officers:**  
-`https://angular-exercise.trunarrative.cloud/TruProxyAPI/rest/Companies/v1/Officers?CompanyNumber={number}`
+`https://exercise.trunarrative.cloud/TruProxyAPI/rest/Companies/v1/Officers?CompanyNumber={number}`
 <details>
   <summary>Response Example</summary>
 
@@ -166,7 +166,7 @@ and return the result from there if the endpoint is called with `companyNumber`.
 
 **Authentication:**\
 Use the API key provided in your request header when calling the endpoints. <br>
-Example: curl -s -H 'x-api-key: xxxxxxxxxxxxx' "https://angular-exercise.trunarrative.cloud/TruProxyAPI/rest/Companies/v1/Officers?CompanyNumber=10241297"<br>
+Example: curl -s -H 'x-api-key: xxxxxxxxxxxxx' "https://exercise.trunarrative.cloud/TruProxyAPI/rest/Companies/v1/Officers?CompanyNumber=10241297"<br>
 
 *API credentials will be provided seperately*
 
