@@ -13,10 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -42,21 +39,23 @@ public class CompanySearchController {
     OfficerService officerService;
 
     @GetMapping("/v1/Search")
-    public String getCompany(@RequestParam(value="companyNumber", required = false) String companyNumber,
+    public ResponseEntity<List<Company>> getCompany(@RequestParam(value="companyNumber", required = false) String companyNumber,
                              @RequestParam(value="companyName", required = false) String companyName,
                              @RequestParam(value="onlyActive", required = false) String onlyActive) {
-        //    A request parameter has to be added to decide whether only active companies should be returned
-        //    Save the companies (by company_number) and its officers and addresses in a database and return the result from there if the endpoint is called with companyNumber.
-        //    The officers of each company have to be included in the company details (new field officers)
-        //    调用officers查询api，添加officer信息到company中
         List<Company> companyList = companyService.searchCompany(companyNumber, companyName, onlyActive);
-        return new Gson().toJson(companyList);
+        if(companyList == null || companyList.isEmpty()) {
+            return new ResponseEntity<>(companyList, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(companyList, HttpStatus.OK);
     }
 
     @GetMapping("/v1/Officers/{number}")
-    public String getOfficers(@PathVariable("number") String number) {
+    public ResponseEntity<List<Officers>> getOfficers(@PathVariable("number") String number) {
         List<Officers> officers  = officerService.searchOfficers(number);
-        return new Gson().toJson(officers);
+        if(officers == null || officers.isEmpty()) {
+            return new ResponseEntity<>(officers, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(officers, HttpStatus.OK);
     }
 
 }

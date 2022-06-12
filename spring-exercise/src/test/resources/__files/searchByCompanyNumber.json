@@ -1,0 +1,46 @@
+[
+  {
+    "company_number":"06500244",
+    "company_type":"ltd",
+    "title":"BBC LIMITED",
+    "company_status":"active",
+    "address_snippet":"Boswell Cottage Main Street, North Leverton, Retford, England, DN22 0AD",
+    "description":"06500244 - Incorporated on 11 February 2008",
+    "kind":"searchresu",
+    "address":{
+      "company_number":"06500244",
+      "locality":"Retford",
+      "postal_code":"DN22 0AD",
+      "premises":"Boswell Cottage Main",
+      "address_line_1":"North Leverton",
+      "country":"England"
+    },
+    "officers":[
+      {
+        "company_number":"06500244",
+        "name":"BOXALL, Sarah Victoria",
+        "officer_role":"secretary",
+        "appointed_on":"2008-02-11",
+        "resigned_on":"2018-02-11"
+      },
+      {
+        "company_number":"06500244",
+        "name":"BRAY, Simon ",
+        "officer_role":"director",
+        "appointed_on":"2008-02-11",
+        "occupation":"Builder",
+        "country_of_residence":"England",
+        "nationality":"English"
+      },
+      {
+        "company_number":"06500244",
+        "name":"BRAY, Simon Anton",
+        "officer_role":"director",
+        "appointed_on":"2008-02-11",
+        "occupation":"Builder",
+        "country_of_residence":"England",
+        "nationality":"English"
+      }
+    ]
+  }
+]
