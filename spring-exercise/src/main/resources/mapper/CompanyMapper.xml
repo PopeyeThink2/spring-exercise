@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trunarrative.springexercise.mapper.CompanyMapper">
+
+    <select id="queryAll" resultType="com.trunarrative.springexercise.entity.Company">
+        select * from company
+    </select>
+
+    <insert id="add" parameterType="com.trunarrative.springexercise.entity.Company">
+        insert into company values (#{company_number},#{company_type},#{title},#{company_status},#{date_of_creation},#{address_snippet},#{description},#{kind}) on duplicate key update company_number = #{company_number}
+    </insert>
+
+    <select id="queryByCompanyNumber" resultType="com.trunarrative.springexercise.entity.Company">
+        select * from company where company_number = #{company_number}
+    </select>
+
+</mapper>

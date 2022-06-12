@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trunarrative.springexercise.mapper.OfficersMapper">
+
+    <select id="queryAll" resultType="com.trunarrative.springexercise.entity.Officers">
+        select * from officers
+    </select>
+
+    <insert id="add" parameterType="com.trunarrative.springexercise.entity.Officers">
+        insert into officers values (#{company_number},#{name},#{officer_role},#{appointed_on},#{resigned_on},#{data_of_birth},#{occupation},#{country_of_residence},#{nationality}) on duplicate key update company_number = #{company_number}
+    </insert>
+
+    <select id="queryByCompanyNumber" resultType="com.trunarrative.springexercise.entity.Officers">
+        select * from officers where company_number = #{company_number}
+    </select>
+
+</mapper>
