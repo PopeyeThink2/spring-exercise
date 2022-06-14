@@ -64,7 +64,10 @@ public class CompanyServiceImpl implements CompanyService {
         // return the result from database if the endpoint is called with companyNumber.
         String number = requestParameter.getCompanyNumber();
         if(StringUtils.hasText(number)) {
-            return getCompanyFromDatabase(number);
+            List<Company> companyList = getCompanyFromDatabase(number);
+            if(companyList != null && !companyList.isEmpty()){
+                return companyList;
+            }
         }
         // concat search terms
         String searchTerm = "";
@@ -78,9 +81,8 @@ public class CompanyServiceImpl implements CompanyService {
         List<Company> companyList = new ArrayList<>();
         Gson gson = new Gson();
         for(int i = 0; i <jsonArray.length(); i++) {
-            // convert json object to costumed class object
-            JSONObject object = jsonArray.getJSONObject(i);
-            Company company = gson.fromJson(String.valueOf(object), Company.class);
+            // convert json object to company class object
+            Company company = gson.fromJson(String.valueOf(jsonArray.getJSONObject(i)), Company.class);
             // check whether the company is active. If not active and the 'onlyActive' parameter is added, skip it
             if(Boolean.TRUE.equals(requestParameter.getOnlyActive()) && !"active".equals(company.getCompany_status())){
                 continue;

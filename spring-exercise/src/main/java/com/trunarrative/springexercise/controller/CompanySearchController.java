@@ -1,23 +1,13 @@
 package com.trunarrative.springexercise.controller;
 
-import com.google.gson.Gson;
 import com.trunarrative.springexercise.entity.Company;
 import com.trunarrative.springexercise.entity.Officers;
-import com.trunarrative.springexercise.entity.RequestParameter;
 import com.trunarrative.springexercise.service.CompanyService;
 import com.trunarrative.springexercise.service.OfficerService;
-import com.trunarrative.springexercise.utils.StringHelper;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

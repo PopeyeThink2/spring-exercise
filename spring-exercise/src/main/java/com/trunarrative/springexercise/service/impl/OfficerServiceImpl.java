@@ -2,6 +2,7 @@ package com.trunarrative.springexercise.service.impl;
 
 import com.google.gson.Gson;
 import com.trunarrative.springexercise.entity.Officers;
+import com.trunarrative.springexercise.mapper.OfficersMapper;
 import com.trunarrative.springexercise.service.OfficerService;
 import com.trunarrative.springexercise.utils.WebHelper;
 import org.json.JSONArray;
@@ -28,6 +29,9 @@ public class OfficerServiceImpl implements OfficerService {
     @Autowired
     WebHelper webHelper;
 
+    @Autowired
+    OfficersMapper officersMapper;
+
     /**
      * search company officers by company number using TruNarrative API
      * @param number company number
@@ -35,18 +39,21 @@ public class OfficerServiceImpl implements OfficerService {
      */
     @Override
     public List<Officers> searchOfficers(String number) {
-        JSONArray jsonArray = webHelper.getJSONArray(OFFICERS_SEARCH_URL + number);
-        List<Officers> officers = new ArrayList<>();
-        Gson gson = new Gson();
-        for(int i = 0; i <jsonArray.length(); i++) {
-            JSONObject object = jsonArray.getJSONObject(i);
-            Officers officer = gson.fromJson(String.valueOf(object), Officers.class);
-            officer.setCompany_number(number);
-            //    Only include officers that are active (resigned_on is not present in that case)
-            if(officer.getResigned_on() == null){
+        // query from database first
+        List<Officers> officers = officersMapper.queryByCompanyNumber(number);
+        if (officers == null || officers.isEmpty()) {
+            officers = new ArrayList<>();
+            JSONArray jsonArray = webHelper.getJSONArray(OFFICERS_SEARCH_URL + number);
+            Gson gson = new Gson();
+            for(int i = 0; i <jsonArray.length(); i++) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                Officers officer = gson.fromJson(String.valueOf(object), Officers.class);
+                officer.setCompany_number(number);
                 officers.add(officer);
             }
         }
+        // Only include officers that are active (resigned_on is not present in that case)
+        officers.removeIf(o -> o.getResigned_on() != null);
         return officers;
     }
 }
