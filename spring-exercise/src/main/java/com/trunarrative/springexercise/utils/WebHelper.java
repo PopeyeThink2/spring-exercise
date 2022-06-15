@@ -63,14 +63,14 @@ public class WebHelper {
     public JSONArray getJSONArray(String url) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("x-api-key", API_KEY);
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity(headers), String.class);
-        JSONObject jsonObject = new JSONObject(response.getBody());
-        JSONArray jsonArray = new JSONArray();
+        JSONArray jsonArray = null;
         try{
+            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity(headers), String.class);
+            JSONObject jsonObject = new JSONObject(response.getBody());
             jsonArray = jsonObject.getJSONArray("items");
         } catch (Exception e) {
             logger.warn(String.format("WebHelper.getJSONArray exception: %s, url: %s", e.getMessage(), url));
         }
-        return jsonArray;
+        return jsonArray == null ? new JSONArray() : jsonArray;
     }
 }

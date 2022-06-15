@@ -1,46 +1,63 @@
-[
-  {
-    "company_number":"06500244",
-    "company_type":"ltd",
-    "title":"BBC LIMITED",
-    "company_status":"active",
-    "address_snippet":"Boswell Cottage Main Street, North Leverton, Retford, England, DN22 0AD",
-    "description":"06500244 - Incorporated on 11 February 2008",
-    "kind":"searchresu",
-    "address":{
+{
+  "items":[
+    {
       "company_number":"06500244",
-      "locality":"Retford",
-      "postal_code":"DN22 0AD",
-      "premises":"Boswell Cottage Main",
-      "address_line_1":"North Leverton",
-      "country":"England"
-    },
-    "officers":[
-      {
+      "company_type":"ltd",
+      "title":"BBC LIMITED",
+      "company_status":"active",
+      "date_of_creation":"2008-02-11",
+      "address_snippet":"Boswell Cottage Main Street, North Leverton, Retford, England, DN22 0AD",
+      "description":"06500244 - Incorporated on 11 February 2008",
+      "kind":"searchresults#company",
+      "address":{
         "company_number":"06500244",
-        "name":"BOXALL, Sarah Victoria",
-        "officer_role":"secretary",
-        "appointed_on":"2008-02-11",
-        "resigned_on":"2018-02-11"
+        "locality":"Retford",
+        "postal_code":"DN22 0AD",
+        "premises":"Boswell Cottage Main Street",
+        "address_line_1":"North Leverton",
+        "country":"England"
       },
-      {
-        "company_number":"06500244",
-        "name":"BRAY, Simon ",
-        "officer_role":"director",
-        "appointed_on":"2008-02-11",
-        "occupation":"Builder",
-        "country_of_residence":"England",
-        "nationality":"English"
-      },
-      {
-        "company_number":"06500244",
-        "name":"BRAY, Simon Anton",
-        "officer_role":"director",
-        "appointed_on":"2008-02-11",
-        "occupation":"Builder",
-        "country_of_residence":"England",
-        "nationality":"English"
-      }
-    ]
-  }
-]
+      "officers":[
+        {
+          "company_number":"06500244",
+          "name":"BOXALL, Sarah Victoria",
+          "officer_role":"secretary",
+          "appointed_on":"2008-02-11",
+          "resigned_on":null,
+          "data_of_birth":null,
+          "occupation":null,
+          "country_of_residence":null,
+          "nationality":null,
+          "address":{
+            "company_number":null,
+            "locality":"London",
+            "postal_code":"SW20 0DP",
+            "premises":"5",
+            "address_line_1":"Cranford Close",
+            "country":"England"
+          }
+        },
+        {
+          "company_number":"06500244",
+          "name":"BRAY, Simon Anton",
+          "officer_role":"director",
+          "appointed_on":"2008-02-11",
+          "resigned_on":null,
+          "data_of_birth":null,
+          "occupation":"Builder",
+          "country_of_residence":"England",
+          "nationality":"English",
+          "address":{
+            "company_number":null,
+            "locality":"London",
+            "postal_code":"SW20 0DP",
+            "premises":"5",
+            "address_line_1":"Cranford Close",
+            "country":"England"
+          }
+        }
+      ]
+    }
+  ],
+  "total_items":1
+}

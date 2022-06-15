@@ -7,7 +7,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static io.restassured.RestAssured.given;
@@ -53,7 +52,7 @@ public class WireMockJunit5Test {
         wireMockServer.stubFor(get(urlEqualTo("/TruProxyAPI/v1/Search?companyNumber=100"))
                 .willReturn(aResponse()
                         .withStatus(404)
-                        .withBody("[]")));
+                        .withBody("{\"items\":[],\"total_items\":0}")));
     }
 
     @Test
@@ -64,8 +63,8 @@ public class WireMockJunit5Test {
                 then().
                 assertThat().statusCode(200);
         Response response =  given().when().get(URL + "?companyNumber=06500244");
-        List<String> name = response.jsonPath().get("title");
-        assertEquals("BBC LIMITED", name.get(0));
+        Integer total_items = response.jsonPath().get("total_items");
+        assertEquals(1, total_items);
     }
 
     @Test
@@ -76,8 +75,8 @@ public class WireMockJunit5Test {
                 then().
                 assertThat().statusCode(200);
         Response response =  given().when().get(URL + "?companyName=BBC");
-        List<String> list = response.jsonPath().get("company_number");
-        assertEquals(20, list.size());
+        Integer total_items = response.jsonPath().get("total_items");
+        assertEquals(20, total_items);
     }
 
     @Test
@@ -88,8 +87,8 @@ public class WireMockJunit5Test {
                 then().
                 assertThat().statusCode(200);
         Response response =  given().when().get(URL + "?companyName=BBC&onlyActive=true");
-        List<String> list = response.jsonPath().get("company_number");
-        assertEquals(18, list.size());
+        Integer total_items = response.jsonPath().get("total_items");
+        assertEquals(18, total_items);
     }
 
     @Test

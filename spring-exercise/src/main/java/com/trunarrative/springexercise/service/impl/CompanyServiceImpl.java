@@ -12,7 +12,6 @@ import com.trunarrative.springexercise.service.CompanyService;
 import com.trunarrative.springexercise.service.OfficerService;
 import com.trunarrative.springexercise.utils.WebHelper;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -70,12 +69,7 @@ public class CompanyServiceImpl implements CompanyService {
             }
         }
         // concat search terms
-        String searchTerm = "";
-        if(StringUtils.hasText(companyNumber) && StringUtils.hasText(companyName)){
-            searchTerm = String.join("&", companyNumber, companyName);
-        } else {
-            searchTerm = StringUtils.hasText(companyName) ? companyName : companyNumber;
-        }
+        String searchTerm = requestParameter.toString();
         // get response from api
         JSONArray jsonArray = webHelper.getJSONArray(COMPANY_SEARCH_URL + searchTerm);
         List<Company> companyList = new ArrayList<>();
@@ -83,14 +77,19 @@ public class CompanyServiceImpl implements CompanyService {
         for(int i = 0; i <jsonArray.length(); i++) {
             // convert json object to company class object
             Company company = gson.fromJson(String.valueOf(jsonArray.getJSONObject(i)), Company.class);
+            if(StringUtils.hasText(number) && !company.getCompany_number().equals(number)) {
+                continue;
+            }
             // check whether the company is active. If not active and the 'onlyActive' parameter is added, skip it
             if(Boolean.TRUE.equals(requestParameter.getOnlyActive()) && !"active".equals(company.getCompany_status())){
                 continue;
             }
             List<Officers> officers = officerService.searchOfficers(company.getCompany_number());
-            insertOrUpdate(company, officers);
-            // The officers of each company have to be included in the company details (new field officers)
-            company.setOfficers(officers);
+            if(officers != null && !officers.isEmpty()) {
+                insertOrUpdate(company, officers);
+                // The officers of each company have to be included in the company details (new field officers)
+                company.setOfficers(officers);
+            }
             companyList.add(company);
         }
         return companyList;

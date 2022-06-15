@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @className: OfficerServiceImpl
@@ -54,6 +55,6 @@ public class OfficerServiceImpl implements OfficerService {
         }
         // Only include officers that are active (resigned_on is not present in that case)
         officers.removeIf(o -> o.getResigned_on() != null);
-        return officers;
+        return Objects.requireNonNullElseGet(officers, ArrayList::new);
     }
 }

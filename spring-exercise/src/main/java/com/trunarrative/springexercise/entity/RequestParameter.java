@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.util.StringUtils;
 
 /**
  * @className: RequestParameter
@@ -23,4 +24,15 @@ public class RequestParameter {
     private String companyNumber;
 
     private Boolean onlyActive;
+
+    @Override
+    public String toString() {
+        String searchTerm = "";
+        if(StringUtils.hasText(this.companyNumber) && StringUtils.hasText(this.companyName)){
+            searchTerm = String.join("&", this.companyNumber, this.companyName);
+        } else {
+            searchTerm = StringUtils.hasText(this.companyName) ? this.companyName : this.companyNumber;
+        }
+        return searchTerm;
+    }
 }
